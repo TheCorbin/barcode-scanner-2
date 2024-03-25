@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Capacitor App</title>
-    <meta
-      name="viewport"
-      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
+<head>
+    <meta charset="UTF-8">
+    <title>Capacitor Barcode Scanner</title>
+    <script type="module">
+        import { Plugins } from '@capacitor/core';
+        const { BarcodeScanner } = Plugins;
 
-    <link rel="icon" type="image/x-icon" href="./assets/icon/favicon.ico" />
-    <link rel="manifest" href="./manifest.json" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <meta name="theme-color" content="#31d53d" />
-  </head>
-  <body>
-    <capacitor-welcome></capacitor-welcome>
+        async function startScan() {
+            try {
+                const result = await BarcodeScanner.startScan(); // Configurations can be passed here
+                // Assuming a successful scan, process the result
+                if (result.hasContent) {
+                    console.log('Barcode content:', result.content);
+                    alert('Barcode content: ' + result.content); // Display barcode content
+                }
+            } catch (error) {
+                console.error('Scan failed', error);
+                alert('Scan failed: ' + error.message);
+            }
+        }
 
-    <script src="./js/capacitor-welcome.js" type="module"></script>
-  </body>
+        window.startScan = startScan; // Make the function accessible to the HTML button's onclick
+    </script>
+</head>
+<body>
+    <h1>Capacitor Barcode Scanner App</h1>
+    <button onclick="startScan()">Start Scan</button>
+</body>
 </html>

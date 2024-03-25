@@ -1,5 +1,10 @@
 import { Browser } from "@capacitor/browser";
 import { SplashScreen } from "@capacitor/splash-screen";
+import {
+  BarcodeScanner,
+  BarcodeFormat,
+  LensFacing,
+} from '@capacitor-mlkit/barcode-scanning';
 
 window.customElements.define(
   "capacitor-welcome",
@@ -29,6 +34,8 @@ window.customElements.define(
     `;
     }
 
+
+
     connectedCallback() {
       const self = this;
 
@@ -43,4 +50,5 @@ window.customElements.define(
         });
     }
   },
+
 );
